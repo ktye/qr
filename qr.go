@@ -73,7 +73,8 @@ func New(A [][]complex128) (QR, error) {
 	}, nil
 }
 
-// Solve solves the overdetermined system A*x = b.
+// Solve solves the overdetermined system A*x = b using the QR decomposition of A.
+// This method can be used for solving the system for multiple RHS vectors b.
 func (D QR) Solve(b []complex128) ([]complex128, error) {
 	if len(b) != D.m {
 		return nil, errors.New("qr: wrong input dimension for QR.Solve.")
@@ -86,6 +87,7 @@ func (D QR) Solve(b []complex128) ([]complex128, error) {
 }
 
 // LeastSquareSolve solves the overdetermined system A*x = b.
+// It does a QR decomposition and solution for each call of the function.
 func LeastSquareSolve(A [][]complex128, b []complex128) ([]complex128, error) {
 	if D, err := New(A); err != nil {
 		return nil, err
