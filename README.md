@@ -21,32 +21,32 @@ The package is self-contained and uses only the standard library.
 
 Example:
 ```go
-func ExampleSolve() {
-        // Solution to the overdetermined 3x2 system: A x = b.
-        // Matrix A (3x2).
-        A := [][]complex128{
-                []complex128{complex(1, 2), complex(5, -1)},
-                []complex128{complex(6, 8), complex(1, 0)},
-                []complex128{complex(3, -2), complex(-7, 3)},
-        }
+// Solution to the overdetermined 3x2 system: A x = b.
+// import "github.com/ktye/qr"
 
-        // Right hand side (3x1):
-        b := []complex128{
-                complex(5, -2),
-                complex(-3, 1),
-                complex(3, 0),
-        }
+// Matrix A (3x2).
+A := [][]complex128{
+        []complex128{complex(1, 2), complex(5, -1)},
+        []complex128{complex(6, 8), complex(1, 0)},
+        []complex128{complex(3, -2), complex(-7, 3)},
+}
 
-        // Compute the QR decomposition.
-        if D, err := New(A); err != nil {
+// Right hand side (3x1):
+b := []complex128{
+        complex(5, -2),
+        complex(-3, 1),
+        complex(3, 0),
+}
+
+// Compute the QR decomposition.
+if D, err := qr.New(A); err != nil {
+        panic(err)
+} else {
+        // Solve the system.
+        if x, err := D.Solve(b); err != nil {
                 panic(err)
         } else {
-                // Solve the system.
-                if x, err := D.Solve(b); err != nil {
-                        panic(err)
-                } else {
-                        // do something with x
-                }
+                // do something with x
         }
-
+}
 ```
