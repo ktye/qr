@@ -6,11 +6,6 @@ import (
 )
 
 func TestRQ(t *testing.T) {
-	check := func(e error) {
-		if e != nil {
-			t.Fatal(e)
-		}
-	}
 	A := [][]float64{
 		[]float64{1, 3, -1},
 		[]float64{2, -0.5, 2.2},
@@ -21,10 +16,10 @@ func TestRQ(t *testing.T) {
 	b := matvec(A, x)
 
 	d, err := NewReal(A)
-	check(err)
+	check(t, err)
 
 	r, err := d.Solve(b)
-	check(err)
+	check(t, err)
 	if len(r) != len(x) {
 		t.Fatal()
 	}
@@ -34,6 +29,12 @@ func TestRQ(t *testing.T) {
 		}
 	}
 }
+func check(t *testing.T, e error) {
+	if e != nil {
+		t.Fatal(e)
+	}
+}
+
 func matvec(A [][]float64, v []float64) []float64 {
 	r := make([]float64, len(A))
 	for i := range r {

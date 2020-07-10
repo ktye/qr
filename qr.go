@@ -127,7 +127,6 @@ func (D QR) RSolve(b []complex128) ([]complex128, error) {
 		x[i] = b[i]
 	}
 	for i := D.n - 1; i >= 0; i-- {
-		x[i] = b[i]
 		for j := i + 1; j < D.n; j++ {
 			x[i] -= D.H[j][i] * x[j]
 		}

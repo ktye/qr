@@ -95,8 +95,9 @@ func (D RQ) RSolve(b []float64) ([]float64, error) {
 		x[i] = b[i]
 	}
 	for i := D.n - 1; i >= 0; i-- {
-		x[i] = b[i]
+		s := 0.0
 		for j := i + 1; j < D.n; j++ {
+			s += D.H[j][i] * x[j]
 			x[i] -= D.H[j][i] * x[j]
 		}
 		x[i] /= D.Rdiag[i]

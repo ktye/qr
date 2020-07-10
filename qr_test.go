@@ -10,7 +10,7 @@ func checkVectorSimilarity(a, b []complex128) error {
 	if len(a) != len(b) {
 		return fmt.Errorf("dimensions mismatch %d != %d", len(a), len(b))
 	}
-	eps := 1E-14
+	eps := 1e-14
 	for i := 0; i < len(a); i++ {
 		if diff := cmplx.Abs(a[i] - b[i]); diff > eps {
 			return fmt.Errorf("element %d differs by %v", i, diff)
